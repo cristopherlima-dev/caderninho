@@ -84,31 +84,3 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-//Cache
-// Recursos Estáticos
-registerRoute(
-  /\.(?:js|css|html)$/,
-  new CacheFirst({
-    cacheName: 'static-resources',
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [200],
-      }),
-    ],
-  })
-);
-
-// Imagens
-registerRoute(
-  /\.(?:png|jpg|jpeg|svg|gif)$/,
-  new StaleWhileRevalidate({
-    cacheName: 'image-cache',
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [200],
-      }),
-    ],
-  })
-);
-
-
