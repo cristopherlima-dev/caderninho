@@ -11,6 +11,7 @@ import Modal from 'react-bootstrap/Modal';
 import TaskList from "./TaskList";
 import CompletedTasks from "./CompletedTasks";
 import ThemeSwitcher from './ThemeSwitcher';
+import { v4 as uuidv4 } from 'uuid';
 
 
 function Adicionar() {
@@ -25,11 +26,13 @@ function Adicionar() {
       setErrorMessage('Você não pode criar uma tarefa em branco');
     } else {
       setErrorMessage('');
-      setTasks([...tasks, inputValue]);
+      //setTasks([...tasks, inputValue]);
+      setTasks([...tasks, { id: uuidv4(), text: inputValue }]);
       setInputValue('');
     }
   };
 
+  /*
   const handleTaskToggle = (index, isCompleted) => {
     if (isCompleted) {
       const taskToMove = completedTasks[index];
@@ -41,6 +44,19 @@ function Adicionar() {
       setTasks(tasks.filter((_, i) => i !== index));
     }
   };
+  */
+
+  const handleTaskToggle = (taskId, isCompleted) => {
+  if (isCompleted) {
+    const taskToMove = completedTasks.find(task => task.id === taskId);
+    setTasks([...tasks, taskToMove]);
+    setCompletedTasks(completedTasks.filter(task => task.id !== taskId));
+  } else {
+    const taskToMove = tasks.find(task => task.id === taskId);
+    setCompletedTasks([...completedTasks, taskToMove]);
+    setTasks(tasks.filter(task => task.id !== taskId));
+  }
+};
 
   const handleReset = () => {
     setShowResetModal(true);
