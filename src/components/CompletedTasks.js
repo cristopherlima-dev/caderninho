@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 
 const CompletedTasks = ({ tasks, onTaskToggle }) => {
   return (
-    <div className="task-text">
+    <div className="task-container">
       {tasks.length > 0 && <h4 className="mt-4">Concluídas</h4>}
       <ListGroup className="mt-2">
         {tasks

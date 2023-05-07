@@ -32,20 +32,6 @@ function Adicionar() {
     }
   };
 
-  /*
-  const handleTaskToggle = (index, isCompleted) => {
-    if (isCompleted) {
-      const taskToMove = completedTasks[index];
-      setTasks([...tasks, taskToMove]);
-      setCompletedTasks(completedTasks.filter((_, i) => i !== index));
-    } else {
-      const taskToMove = tasks[index];
-      setCompletedTasks([...completedTasks, taskToMove]);
-      setTasks(tasks.filter((_, i) => i !== index));
-    }
-  };
-  */
-
   const handleTaskToggle = (taskId, isCompleted) => {
   if (isCompleted) {
     const taskToMove = completedTasks.find(task => task.id === taskId);
@@ -75,10 +61,10 @@ function Adicionar() {
   const [darkTheme, setDarkTheme] = useState(false);
 
   return (
-    <Container style={darkTheme ? { backgroundColor: '#343a40', color: 'white' } : {}}> {/* Altere esta linha */}
+    <Container className="full-height"> 
       <Row className="align-items-center mb-3">
         <Col xs="auto">
-          <ThemeSwitcher darkTheme={darkTheme} onThemeToggle={setDarkTheme} /> {/* Adicione o prop darkTheme */}
+          <ThemeSwitcher darkTheme={darkTheme} onThemeToggle={setDarkTheme} />
         </Col>
       </Row>      
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
@@ -103,10 +89,16 @@ function Adicionar() {
           </Stack>
         </Col>
       </Row>
-      <TaskList tasks={tasks} onTaskToggle={handleTaskToggle} />
-      <CompletedTasks tasks={completedTasks} onTaskToggle={handleTaskToggle} />
-
-      <Modal show={showResetModal} onHide={handleResetCancel}>
+      <Col xs={12} md={6}>
+        <TaskList tasks={tasks} onTaskToggle={handleTaskToggle} />
+      </Col>
+      <Col xs={12} md={6}>
+        <CompletedTasks tasks={completedTasks} onTaskToggle={handleTaskToggle} />
+      </Col>
+      <Modal 
+        show={showResetModal} 
+        onHide={handleResetCancel}
+        className={darkTheme ? "dark-theme-modal" : ""}>
         <Modal.Header closeButton>
           <Modal.Title>Descartar lista</Modal.Title>
         </Modal.Header>

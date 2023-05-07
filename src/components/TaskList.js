@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 
 const TaskList = ({ tasks, onTaskToggle }) => {
   return (
-    <div className="task-text">
+    <>
       {tasks.length > 0 && <h4 className="mt-4">Pendentes</h4>}
       <ListGroup className="mt-2">
         {tasks
@@ -23,7 +23,7 @@ const TaskList = ({ tasks, onTaskToggle }) => {
           </ListGroup.Item>
         ))}
       </ListGroup>
-    </div>
+    </>
   );
 };
 
